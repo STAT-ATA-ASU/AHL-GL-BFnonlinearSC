@@ -524,7 +524,7 @@ set.seed(31)
 mod_RF <- train(y = trainingB$medv,
                 x = trainingB[, 1:13],
                 trControl = myControlB,
-                tuneLength = 10,
+                tuneLength = 4,
                 method = "rf")
 
 mod_RF
@@ -546,7 +546,7 @@ RMSE(pred = RF_pred, obs = testingB$medv)
 
 _____________
 
-19. Use the `train()` function with `method = "rf"`, `tuneLength = 10` along with the `myControl` as the `trControl` to fit a random forest named `mod_RF2`. Use `set.seed(42)` for reproducibility. 
+19. Use the `train()` function with `method = "rf"`, `tuneLength = 4` along with the `myControl` as the `trControl` to fit a random forest named `mod_RF2`. Use `set.seed(42)` for reproducibility. 
 
 ```{r}
 # Type your code and comments inside the code chunk
