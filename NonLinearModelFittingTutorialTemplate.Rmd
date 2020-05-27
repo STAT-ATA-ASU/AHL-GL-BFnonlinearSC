@@ -17,9 +17,6 @@ css: MyLab.css
 ```{r label = "setup", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE, warning = FALSE)
 library(caret)
-# Parallel Processing
-library(doMC)
-registerDoMC(cores = 12)
 ```
 
 ```{r, results = "hide", echo = FALSE, message = FALSE}
