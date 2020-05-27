@@ -17,6 +17,9 @@ css: MyLab.css
 ```{r label = "setup", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE, warning = FALSE)
 library(caret)
+# Parallel Processing
+library(doMC)
+registerDoMC(cores = 12)
 ```
 
 ```{r, results = "hide", echo = FALSE, message = FALSE}
@@ -402,7 +405,7 @@ rpart.plot(mod_TRBallG)
 The `predict()` function is used to obtain the fitted/predicted values of `medv` using the testing data (`testingB`).
 
 ```{r}
-mod_TRBallG_pred <- predict(mod_TRBallG, data = testingB)
+mod_TRBallG_pred <- predict(mod_TRBallG, newdata = testingB)
 ```
 
 Next, the `RMSE()` function returns the root mean square error for the regression tree model using the `testing` data.
@@ -535,7 +538,7 @@ Using the default arguments for `rf` returns an average RMSE value of `r min(mod
 Next, the `predict()` function is used to predict to the median house value (`medv`) using the testing data (`testingB`).
 
 ```{r}
-RF_pred <- predict(mod_RF, data = testingB)
+RF_pred <- predict(mod_RF, newdata = testingB)
 ```
 
 Next, the `RMSE()` function is used to determine the root mean square error for the the random forest model using the testing data.
@@ -613,7 +616,7 @@ Using the default arguments for `knn` returns an average RMSE value of `r min(mo
 The function `RMSE()` in conjunction with the `predict()` function are used to find the root mean square for the testing data.
 
 ```{r}
-mod_KNN_pred <- predict(mod_KNN, data = testingB)
+mod_KNN_pred <- predict(mod_KNN, newdata = testingB)
 
 RMSE(pred = mod_KNN_pred, obs =testingB$medv)
 ```
