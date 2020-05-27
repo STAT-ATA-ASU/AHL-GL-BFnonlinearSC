@@ -411,7 +411,7 @@ Next, the `RMSE()` function returns the root mean square error for the regressio
 RMSE(pred = mod_TRBallG_pred, obs =testingB$medv)
 ```
 
-NOTE: There is a rather large difference between the training RMSE (`r min(mod_TRBall$results$RMSE)`) and the testing RMSE (`r RMSE(pred = mod_TRBallG_pred, obs =testingB$medv)`).  What does this suggest? **Overfit**
+NOTE: There is a difference between the training RMSE (`r min(mod_TRBall$results$RMSE)`) and the testing RMSE (`r RMSE(pred = mod_TRBallG_pred, obs =testingB$medv)`).  What does this suggest? 
 
 _________________________
 
