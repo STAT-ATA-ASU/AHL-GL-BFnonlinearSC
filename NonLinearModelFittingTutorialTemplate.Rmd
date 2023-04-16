@@ -17,6 +17,9 @@ css: MyLab.css
 ```{r label = "setup", include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", comment = NA, message = FALSE, warning = FALSE)
 library(caret)
+# Parallel Processing
+library(doMC)
+registerDoMC(cores = 12)
 ```
 
 ```{r, results = "hide", echo = FALSE, message = FALSE}
@@ -344,7 +347,7 @@ library(rpart.plot)
 rpart.plot(mod_TRBG)
 ```
 
-Consider the `mod_TRBG` output and the resulting plot from using `rpart.plot()`. Note that the `age` has negative values. This is due to the use of transformed variables. There are n = 121 homes greater than or equal to a value of 0.86 for the variable (transformed) `age`. The average `medv` for these 121 homes is 17.10 thousand dollars. There are n = 109 homes under 0.86 for `age` but greater than -0.047 or more for `age`. These 109 homes have an average `medv` of 22.18 thousand dollars. There are n = 110 homes under -0.047 for `age` but over -1.3 for `age`. The average `medv` for the n = 110 homes is 25.22 thousand dollars. Finally, average median price of the homes under -1.3 for `age` is 27.94 thousand dollars. 
+Consider the `mod_TRBG` output and the resulting plot from using `rpart.plot()`. Note that the `age` has negative values. This is due to the use of transformed variables. There are n = 118 homes greater than or equal to a value of 0.86 for the variable (transformed) `age`. The average `medv` for these 118 homes is 17.22 thousand dollars. There are n = 195 homes under 0.86 for `age` but greater than -1.047 or more for `age`. These 195 homes have an average `medv` of 23.36 thousand dollars. There are n = 94 homes under -1.047 for `age`. The average `medv` for the n = 94 homes is 27.71thousand dollars. 
 
 Even though the transformed variables generally produce better models, the interpretations can be rather difficult. In such situations, it may be advisable to use untransformed variables. 
 
@@ -368,7 +371,7 @@ library(rpart.plot)
 rpart.plot(mod_TRGU)
 ```
 
-Using the untransformed data, the explanation is simple and practical. Specifically, there are n = 121 homes greater than or equal to 92.5 years of age. The average `medv` for these 121 homes is 17.10 thousand dollars. There are n = 109 homes under 92.5 years of age but greater than 70.5 or more years of age. These 109 homes have an average `medv` of 22.18 thousand dollars. Finally, there are n = 177 homes under 70.5 years of age. The average `medv` for the n = 177 homes under 70.5 years of age is 26.25 thousand dollars.
+Using the untransformed data, the explanation is simple and practical. Specifically, there are n = 118 homes greater than or equal to 92.3 years of age. The average `medv` for these 118 homes is 17.22 thousand dollars. There are n = 195 homes under 92.3 years of age but greater than 41.3 or more years of age. These 195 homes have an average `medv` of 23.63 thousand dollars. Finally, there are n = 94 homes under 41.3 years of age. The average `medv` for the n = 94 homes under 41.3 years of age is 27.72 thousand dollars.
 
 > Note: From here forward we will use the untransformed predictors (data) in the examples.
 
@@ -382,7 +385,7 @@ To get a Tree model with all the predictor variables, modify the previous `R` co
 # Regression Tree with all predictors
 set.seed(31)
 mod_TRBall <- train(y = trainingB$medv,
-                    x = trainingB[ , 1:13], # [ , -14]
+                    x = trainingB[ , -14], 
                     trControl = myControlB,
                     method = "rpart",
                     tuneLength = 10)
